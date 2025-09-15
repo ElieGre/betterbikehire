@@ -1,18 +1,18 @@
-from dotenv import load_dotenv
-from pydantic import BaseSettings
+import os
 
-# load .env from project root if present
+from dotenv import load_dotenv
+from pydantic import BaseModel
+
 load_dotenv()
 
 
-class Settings(BaseSettings):
-    DATABASE_URL: str
-    REDIS_URL: str | None = None
-    TFL_API_KEY: str | None = None
-    MAPBOX_API_KEY: str | None = None
-
-    class Config:
-        env_file = ".env"  # fall back to local file if not already loaded
+class Settings(BaseModel):
+    TFL_BASE_URL: str = "https://api.tfl.gov.uk"
+    TFL_APP_ID: str | None = os.getenv("TFL_APP_ID")
+    TFL_APP_KEY: str | None = os.getenv("TFL_APP_KEY")
+    # scoring tunables
+    DEST_STATION_RADIUS_M: int = int(os.getenv("DEST_STATION_RADIUS_M", "450"))
+    ORIGIN_SEARCH_RADIUS_M: int = int(os.getenv("ORIGIN_SEARCH_RADIUS_M", "800"))
 
 
 settings = Settings()
