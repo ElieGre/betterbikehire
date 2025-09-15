@@ -1,0 +1,25 @@
+# web framework
+fastapi
+uvicorn[standard]
+
+# http + data models
+httpx
+pydantic
+
+# database (Postgres/Supabase)
+sqlalchemy
+psycopg2-binary
+
+# caching / tasks
+redis
+
+# env & utils
+python-dotenv
+
+# testing & quality (dev-only; optional)
+pytest
+pytest-asyncio
+ruff
+black
+isort
+mypy
